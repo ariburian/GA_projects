@@ -1,0 +1,17 @@
+Note: Please form this however you think makes sense for you -- brevity and completeness are key. You will want to provide enough information and anticipate key questions without providing too little or too much information. Your summary should explain broadly: 1) what data you had and the major choices you made, 2) what model(s) you used and any specific processes you applied, 3) the strengths of your final model, and 4) caveats or weaknesses in the model. Please note that all numbers and findings here are made up, please do not double check it with real data :D
+
+---
+
+Problem Statement: Predict, based on information present at ticket purchase, who will survive or perish during the sinking of the Titanic
+
+Data: Data is mostly clean at first start and contains information on various passengers. For my chosen variables (age, gender, and passenger class), I provided basic cleaning by imputing the mean for each column (mode in the case of passenger class and gender). Several other features were present in the data set but were ultimately eliminated for various reasons.
+
+In particular, number of family members was discounted due to an unclear estimated relationship between their presence and survival (there are cases where family members helped each other survive and perished waiting for a missing family member to appear, as we found through independent research). Passenger fare was discounted due to irregularities in scaling and missing data (it is unclear whether these individuals received free trips or that data is missing at random). Cabin number of the individuals was highly missing and as such presented low predictive power. Finally, the port of embarkation did not have any correlative power with the survival rate.
+
+Modeling: Two models were compared -- a k-Nearest Neighbors classification and a Logistic Regression. Given the relatively small size of the data, I did not believe that size limitations would be an undue burden within kNN.
+
+Through several initial runs, I found that Logistic Regression continually out-performed k-Nearest Neighbors by about 0.05-0.10 points in mean accuracy -- enough that I felt comfortable focusing my effort on Logistic Regression alone. A polynomial feature for Age (Age-squared) was included in some initial runs but did not have a strong effect on accuracy. I performed a Grid Search to identify any possible regularization that might improve accuracy, but as would be expected with so few variables, I did not see any measurable improvement.
+
+Testing on a hold-out sample after the modeling process was complete rendered a mean accuracy score of 0.82, suggesting that on data the model had never seen before, I was able to predict over 4/5ths of all passengers correctly. 
+
+Conclusion: This model performs fairly well against hold-out data, but there are several areas for improvement. Logistic regression is sensitive to the model specification, so there may be further tweaks to the features we use that could increase its predictive power. Furthermore, additional data (in the form of complete cabin numbers, for example) would likely make the model more complete, as we could consider how far from a given lifeboat a room would be as a proxy for ease of escape. Finally, a different modeling technique such as random forests might provide a stronger result by identifying areas where the relationship between survival and a given feature is non-linear.

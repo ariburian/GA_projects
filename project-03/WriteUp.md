@@ -1,0 +1,9 @@
+To clean the data, I assessed the value of each column in the data set.  'ItinFare' was taken out of to be used as the 'target.'  I also removed "Unnamed" and "ItinID" because they are just randomly assigned numbers on each row with no bearing on the data.  I also excluded 'FarePerMile' because that is calculated based on the 'ItinFare' and you can't use something generated from the target as a predictor for that target.  'Origin' is a string, so I changed it to a dummy variable of "is_ord" which would return 1 for Ohare and 0 for Midway.  For 'PRCarrier' I used the method 'getdummies' to populate a dummy variable for each individual airline in the 'PRCarrier' column.  Since this returns a new dataframe, I joined these columns back to our original dataframe.  All of these changes were included in my 'predictors' dataframe titled X_clean. 
+
+After a few exploritory trials, I created a train_test_split and sectioned off 40% of the data for a final test at the end.
+
+I made a linear regression and ridge regression, and found the r-values to be very similar, so I chose to use the linear regression because it is less complex.  
+
+I then ran a final test to ensure that I got a similar r-value for my test data, and I did.  Although all of my r-values are between 0.15-0.20, I think that is the best I can do.  If I were to collect data to use as predictors of ticket prices, I would include flight desination, number of days before the flight that the ticket was purchased, and the day of the week that the flight occurred, as I have seen these to be indicators of price in real life much more than the number of coupons for the flight or the distance traveled. 
+
+I started in a jupyter notebook, then downloaded is at project-03.py, and put my final models into results.py, with my actual versus predicted results display in ll_model_1.png.
